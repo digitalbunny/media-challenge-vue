@@ -10,7 +10,7 @@
                             {{ media.Title }}
                         </router-link>
                         <div class="flex space-x-4 text-sm 2xl:text-base text-gray-400">
-                            <p v-if="media.Author">By {{ media.Author }} &nbsp; | </p>
+                            <p v-if="media.Author">By {{ media.Author }}</p>
                             <p v-if="media.PublicationYear">Year {{ media.PublicationYear }}</p>
                         </div>
                     </div>
@@ -40,6 +40,7 @@
 import { defineComponent, onMounted } from "vue";
 import { mediaStore } from "@/store/index";
 import MediaCard from "@/components/MediaCard.vue";
+import { storeToRefs } from "pinia";
 
 export default defineComponent({
   name: "Media",
@@ -50,17 +51,18 @@ export default defineComponent({
 
   setup() {
         const mediaLibrary = mediaStore();
+        const { media } = storeToRefs(mediaLibrary);
 
         const getSubjectList = (subjects: string): Array<string>  => {
             return subjects.split(", ")
         }
 
         onMounted(() => {
-             mediaLibrary.fetchMedia();
+            mediaLibrary.fetchMedia();
         })
 
         return {
-            library: mediaLibrary.media,
+            library: media,
             getSubjectList
       }
   }

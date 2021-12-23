@@ -37,8 +37,8 @@ export type MediaResponse = {
 }
   
 export type MediaDetail = {
-    Media: Media
-    Media_type: MediaType
+    source: Media
+    source_type: MediaType
     checkout: Checkout[]
 }
 
