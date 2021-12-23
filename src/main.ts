@@ -1,11 +1,11 @@
-import { createApp } from "vue"
-import App from "./App.vue"
-import router from "./router"
+import { createApp } from "vue";
+import App from "./App.vue";
+import router from "./router";
+import dotenv from "dotenv";
+import "@/assets/css/tailwind.css";
 
-import dotenv from "dotenv"
+dotenv.config();
 
-dotenv.config()
-
-import { createPinia } from "pinia"
+import { createPinia } from "pinia";
 
 createApp(App).use(router).use(createPinia()).mount("#app")

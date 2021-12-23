@@ -1,9 +1,9 @@
 <template>
     <div>
         <div v-if="library">
-          <u>
-            <li v-for="media in library.results" :key="media.BibNum">{{ media.Title }}</li>
-          </u>
+            <section class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div v-for="media in library.results" :key="media.BibNum">{{ media.Title }}</div>
+            </section>
         </div>
     </div>
 </template>
@@ -24,11 +24,11 @@ export default defineComponent({
       const mediaLibrary = mediaStore();
 
       onMounted(() => {
-        mediaLibrary.fetchMedia();
+          mediaLibrary.fetchMedia();
       })
 
       return {
-        library: mediaLibrary.media
+          library: mediaLibrary.media
       }
   }
 });
