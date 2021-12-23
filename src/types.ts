@@ -41,3 +41,9 @@ export type MediaDetail = {
     Media_type: MediaType
     checkout: Checkout[]
 }
+
+export type FetchPayload = {
+    search?: string
+    offset?: number
+    limit?: number
+}
