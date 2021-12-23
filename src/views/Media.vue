@@ -2,7 +2,35 @@
     <div>
         <div v-if="library">
             <section class="grid grid-cols-1 md:grid-cols-2 gap-10">
-                <div v-for="media in library.results" :key="media.BibNum">{{ media.Title }}</div>
+                <div class="border rounded-md shadow-sm hover:border-gray-300 hover:shadow py-4 px-6 space-y-6" v-for="media in library.results" :key="media.BibNum">
+                    <div>
+                        <router-link 
+                            :to="{name: 'media-detail', params: {id: media.BibNum}}"
+                            class="text-lg md:text-lg lg:text-2xl font-semibold text-blue-800 mb-2 line-clamp-1">
+                            {{ media.Title }}
+                        </router-link>
+                        <div class="flex space-x-4 text-sm 2xl:text-base text-gray-400">
+                            <p v-if="media.Author">By {{ media.Author }} &nbsp; | </p>
+                            <p v-if="media.PublicationYear">Year {{ media.PublicationYear }}</p>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <p>Subjects</p>
+                        <p class="flex flex-wrap mt-1.5">
+                            <span 
+                                v-for="subject in getSubjectList(media.Subjects)" :key="subject" 
+                                class="border bg-gray-100 px-2 py-0.5 my-1.5 mr-1.5 text-sm rounded">
+                                {{ subject }}
+                            </span>
+                        </p>
+                    </div>
+
+                    <p v-if="media.ISBN" class="space-x-2">
+                        <span>ISBN</span>
+                        <span>{{ media.ISBN }}</span>
+                    </p>
+                </div>
             </section>
         </div>
     </div>
@@ -21,14 +49,19 @@ export default defineComponent({
   },
 
   setup() {
-      const mediaLibrary = mediaStore();
+        const mediaLibrary = mediaStore();
 
-      onMounted(() => {
-          mediaLibrary.fetchMedia();
-      })
+        const getSubjectList = (subjects: string): Array<string>  => {
+            return subjects.split(", ")
+        }
 
-      return {
-          library: mediaLibrary.media
+        onMounted(() => {
+             mediaLibrary.fetchMedia();
+        })
+
+        return {
+            library: mediaLibrary.media,
+            getSubjectList
       }
   }
 });
