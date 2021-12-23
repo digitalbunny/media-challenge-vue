@@ -1,6 +1,8 @@
 <template>
     <div>
         <div v-if="library">
+            <h2 class="text2xl lg:text-4xl font-semibold mb-4">All Media</h2>
+
             <section class="grid grid-cols-1 md:grid-cols-2 gap-10">
                 <div class="border rounded-md shadow-sm hover:border-gray-300 hover:shadow py-4 px-6 space-y-6" v-for="media in library.results" :key="media.BibNum">
                     <div>
@@ -39,15 +41,10 @@
 <script lang="ts">
 import { defineComponent, onMounted } from "vue";
 import { mediaStore } from "@/store/index";
-import MediaCard from "@/components/MediaCard.vue";
 import { storeToRefs } from "pinia";
 
 export default defineComponent({
   name: "Media",
-
-  components: {
-      MediaCard,
-  },
 
   setup() {
         const mediaLibrary = mediaStore();
