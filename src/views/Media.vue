@@ -1,7 +1,7 @@
 <template>
     <div>
         <div v-if="library">
-            <h2 class="text2xl lg:text-4xl font-semibold mb-4">All Media</h2>
+            <h2 class="text-2xl lg:text-4xl font-semibold mb-6">All Media</h2>
 
             <section class="grid grid-cols-1 md:grid-cols-2 gap-10">
                 <div class="border rounded-md shadow-sm hover:border-gray-300 hover:shadow py-4 px-6 space-y-6" v-for="media in library.results" :key="media.BibNum">

@@ -6,6 +6,9 @@ module.exports = {
         extend: {
             colors: {
                 gray: colors.trueGray
+            },
+            fontFamily: {
+                rubik: ["Rubik"]
             }
         },
     },
